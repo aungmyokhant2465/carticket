@@ -18,6 +18,7 @@ class CreateTravelsTable extends Migration
             $table->text('start_city');
             $table->text('stop_city');
             $table->text('medium_city')->nullable();
+            $table->integer('travel_time_id')->nullable();
             $table->timestamps();
         });
     }

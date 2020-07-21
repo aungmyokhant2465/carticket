@@ -132,6 +132,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('get.travelsWithAndWithoutTime')}}" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Only Travels</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('get.addTravel')}}" class="nav-link">
                                 <i class="fa fa-plus-circle nav-icon"></i>
                                 <p>Add Travel</p>

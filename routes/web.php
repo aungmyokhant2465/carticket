@@ -180,6 +180,24 @@ Route::group(['middleware'=>'role:admin|staff'],function (){
             'uses'=>"TravelController@postEditTravelTime",
             'as'=>'post.editTravelTime'
         ]);
+        Route::group(['prefix'=>'withAndWithout/time'],function (){
+            Route::get('/', [
+                'uses'=>"TravelController@getTravelWithoutTime",
+                'as'=>'get.travelsWithAndWithoutTime'
+            ]);
+            Route::get('edit/{travel_id}',[
+                'uses'=>"TravelController@getEditTravelWithoutTime",
+                'as'=>'get.editTravelWithAndWithoutTime'
+            ]);
+            Route::post('edit',[
+                'uses'=>'TravelController@postEditTravelWithoutTime',
+                'as'=>'post.editTravelWithAndWithoutTime'
+            ]);
+            Route::get('delete/{travel_id}',[
+                'uses'=>"TravelController@getDeleteTravelWithoutTime",
+                'as'=>'get.deleteTravelWithAndWithoutTime'
+            ]);
+        });
     });
 
 });

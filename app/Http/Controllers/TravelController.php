@@ -58,6 +58,9 @@ class TravelController extends Controller
         $travel_time->car_id = $request['car_id'];
         $travel_time->travel_id = $request['travel_id'];
         $travel_time->save();
+        $travel = Travels::whereId($request['travel_id'])->first();
+        $travel->travel_time_id = $travel_time->id;
+        $travel->update();
         return redirect()->back()->with('info',"The time table have been saved.");
     }
     public function getTravels(){
@@ -67,7 +70,7 @@ class TravelController extends Controller
     public function getDeleteTravel($travel_id, $travelTime_id){
         $travel = Travels::whereId($travel_id)->firstOrFail();
         $travelTime = Travel_time::whereId($travelTime_id)->firstOrFail();
-        $travel->delete();
+        //$travel->delete();
         $travelTime->delete();
         return redirect()->back()->with('info',"The travel ".$travelTime_id." have been deleted.");
     }
@@ -136,5 +139,43 @@ class TravelController extends Controller
         $travel_time->travel_id = $request['travel_id'];
         $travel_time->update();
         return redirect()->route('get.travels')->with('info',"Successfully, The time table have been updated.");
+    }
+
+    public function getTravelWithoutTime() {
+        $travels_without_time = Travels::where('travel_time_id',null)->get();
+        $travels = Travels::where('travel_time_id','!=',null)->get();
+        return view('Travel.travelWithoutTime')->with(['travels_without_time'=>$travels_without_time, 'travels'=>$travels]);
+    }
+
+    public function getEditTravelWithoutTime($travel_id) {
+        $cities = City::get();
+        $travel = Travels::whereId($travel_id)->first();
+        return view('Travel.editTravel')->with(['cities'=>$cities,'travel'=>$travel]);
+    }
+
+    public function postEditTravelWithoutTime(Request $request) {
+        $this->validate($request,[
+            'start_city'=>'required',
+            'stop_city'=>'required',
+        ]);
+        $arr = [];
+        for ($c=0;$c<$request['count'];$c++){
+            $arr[$c]=$request[$c.'/medium_city'];
+        }
+        $stArr = implode(",",$arr);
+        $travel = Travels::whereId($request['travel_id'])->first();
+        $travel->start_city = $request['start_city'];
+        $travel->stop_city = $request['stop_city'];
+        if($stArr){
+            $travel->medium_city = $stArr;
+        }
+        $travel->update();
+        return redirect()->route("get.travelsWithAndWithoutTime")->with('info',"Successfully, A Travel have been updated.");
+    }
+
+    public function  getDeleteTravelWithoutTime($travel_id) {
+        $travel = Travels::whereId($travel_id)->firstOrFail();
+        $travel->delete();
+        return redirect()->back()->with('info',"The travel ".$travel_id." have been deleted.");
     }
 }

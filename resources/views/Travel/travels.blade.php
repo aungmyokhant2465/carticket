@@ -10,7 +10,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark"><a href="{{route('get.addTravel')}}" class="btn btn-outline-secondary"><i class="fa fa-plus-square"></i></a></h1>
+                        <a href="{{route('get.addTravel')}}" class="btn btn-outline-secondary"><i class="fa fa-plus-square"></i></a>
+                        <a href="{{route('get.travelsWithAndWithoutTime')}}" class="btn btn-outline-secondary">Travels <span style="font-size: 0.7em">With and Without Time</span></a>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">

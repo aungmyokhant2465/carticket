@@ -17,12 +17,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark"><a href="{{route('get.travelsWithAndWithoutTime')}}" class="btn btn-outline-secondary"><i class="fa fa-backward"></i></a></h1>
+                        <h1 class="m-0 text-dark"><a href="{{route('get.travels')}}" class="btn btn-outline-secondary"><i class="fa fa-backward"></i></a></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('welcome')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('get.travelsWithAndWithoutTime')}}">Travel with and without time</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('get.travels')}}">Travels</a></li>
                             <li class="breadcrumb-item active">Edit Travel</li>
                         </ol>
                     </div><!-- /.col -->
@@ -36,7 +36,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form method="post" action="{{route('post.editTravelWithAndWithoutTime')}}">
+                        <form method="post" action="{{route('post.editTravel')}}">
                             <div class="row">
                                 <div class="col-10"></div>
                                 <div class="col-2">
@@ -118,6 +118,7 @@
                                 </div>
                             </div>
                             <input type="hidden" name="travel_id" value="{{$travel->id}}">
+                            <input type="hidden" name="travelTime_id" value="{{$travelTime_id}}">
                             {{@csrf_field()}}
                         </form>
                     </div>
