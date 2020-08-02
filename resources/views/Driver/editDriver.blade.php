@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" id="email" name="email" class="form-control @if($errors->has("email"))is-invalid @endif">
+                                            <input type="email" id="email" name="email" class="form-control @if($errors->has("email"))is-invalid @endif" value="{{$driver->email}}">
                                             @if($errors->has("email"))<span class="invalid-feedback">{{$errors->first("email")}}</span> @endif
                                         </div>
                                         <div class="form-group">
@@ -141,44 +141,46 @@
         }
     </style>
 @stop
-@section("script")
-    <script>
-        var state_name= $("#state_name");
-        var yangon= $("#yangon");
-        var pago= $("#pago");
-        var mon= $("#mon");
-        yangon.on("click",function () {
-            $(".yan").css("display","block");
-            $(".pa").css("display","none");
-            $(".mo").css("display","none");
-            state_name.html("Yangon")
-        });
-        pago.on("click",function () {
-            $(".yan").css("display","none");
-            $(".pa").css("display","block");
-            $(".mo").css("display","none");
-            state_name.html("Pago")
-        });
-        mon.on("click",function () {
-            $(".yan").css("display","none");
-            $(".pa").css("display","none");
-            $(".mo").css("display","block");
-            state_name.html("Mon")
-        });
-        //
-        var nrcInput = $("#nrc_no");
-        var full = $("#full");
-        var vl;
-        var v;
-        var fullNrc;
-        $(".nrcPrefix").change(function () {
-            vl = $(".nrcPrefix").children(":selected").val();
-        });
-        nrcInput.keyup(function () {
-            v = nrcInput.val();
-            fullNrc = vl + v;
-            full.val(fullNrc);
-        });
-    </script>
-@stop
+@push("script")
+{{--    <script>--}}
+{{--        var state_name= $("#state_name");--}}
+{{--        var yangon= $("#yangon");--}}
+{{--        var pago= $("#pago");--}}
+{{--        var mon= $("#mon");--}}
+{{--        yangon.on("click",function () {--}}
+{{--            $(".yan").css("display","block");--}}
+{{--            $(".pa").css("display","none");--}}
+{{--            $(".mo").css("display","none");--}}
+{{--            state_name.html("Yangon")--}}
+{{--        });--}}
+{{--        pago.on("click",function () {--}}
+{{--            $(".yan").css("display","none");--}}
+{{--            $(".pa").css("display","block");--}}
+{{--            $(".mo").css("display","none");--}}
+{{--            state_name.html("Pago")--}}
+{{--        });--}}
+{{--        mon.on("click",function () {--}}
+{{--            $(".yan").css("display","none");--}}
+{{--            $(".pa").css("display","none");--}}
+{{--            $(".mo").css("display","block");--}}
+{{--            state_name.html("Mon")--}}
+{{--        });--}}
+{{--        //--}}
+{{--        var nrcInput = $("#nrc_no");--}}
+{{--        var full = $("#full");--}}
+{{--        var vl;--}}
+{{--        var v;--}}
+{{--        var fullNrc;--}}
+{{--        $(".nrcPrefix").change(function () {--}}
+{{--            vl = $(".nrcPrefix").children(":selected").val();--}}
+{{--        });--}}
+{{--        nrcInput.keyup(function () {--}}
+{{--            v = nrcInput.val();--}}
+{{--            fullNrc = vl + v;--}}
+{{--            full.val(fullNrc);--}}
+{{--        });--}}
+{{--    </script>--}}
+
+<script src="{{URL::to('nrc.js')}}"></script>
+@endpush
 

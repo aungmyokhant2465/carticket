@@ -57,10 +57,8 @@ class AuthController extends Controller
     }
 
     public function getUsers(){
-        $users = User::get();
-        $city = City::get();
-        $role = Role::get();
-        return view('User.users')->with(["users"=>$users,"city"=>$city, "roles"=>$role]);
+        $users = User::paginate(3);
+        return view('User.users')->with(["users"=>$users]);
     }
 
     public function getUserDelete(Request $request){
@@ -68,6 +66,13 @@ class AuthController extends Controller
         $user->delete();
         Storage::disk("images")->delete($request['image_name']);
         return redirect()->back()->with('info',"The User have been deleted permanently.");
+    }
+
+    public function getUserEdit($user_id){
+        $user = User::whereId($user_id)->firstOrFail();
+        $city = City::get();
+        $role = Role::get();
+        return view('User.edit')->with(["user"=>$user,"city"=>$city, "roles"=>$role]);
     }
 
     public function postUserEdit(Request $request){
@@ -101,10 +106,14 @@ class AuthController extends Controller
         return redirect()->back()->with("info","The User have been updated.");
     }
     public function getLogin(){
+        if(Auth::check()){
+            return redirect()->route('welcome');
+        }
         return view('User.login');
     }
     public function postLogin(Request $request){
-        if(Auth::attempt(['email'=>$request['email'],'password'=>$request['pass']],$request['remember'])){
+        $remember = $request['remember']? true: false;
+        if(Auth::attempt(['email'=>$request['email'],'password'=>$request['pass']],$remember)){
             return redirect()->route('welcome');
         }
         else{

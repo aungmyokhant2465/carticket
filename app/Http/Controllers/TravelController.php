@@ -61,43 +61,13 @@ class TravelController extends Controller
         $travel = Travels::whereId($request['travel_id'])->first();
         $travel->travel_time_id = $travel_time->id;
         $travel->update();
-        return redirect()->back()->with('info',"The time table have been saved.");
+        return redirect()->route('get.travels')->with('info',"The time table have been saved.");
     }
     public function getTravels(){
-        $travel_times = Travel_time::get();
+        $travel_times = Travel_time::paginate(1);
         return view('Travel.travels')->with(['travel_times'=>$travel_times]);
     }
-    public function getDeleteTravel($travel_id, $travelTime_id){
-        $travel = Travels::whereId($travel_id)->firstOrFail();
-        $travelTime = Travel_time::whereId($travelTime_id)->firstOrFail();
-        //$travel->delete();
-        $travelTime->delete();
-        return redirect()->back()->with('info',"The travel ".$travelTime_id." have been deleted.");
-    }
-    public function getEditTravel($travel_id,$travelTime_id){
-        $cities = City::get();
-        $travel = travels::whereId($travel_id)->firstOrFail();
-        return view('Travel.editTravel')->with(['cities'=>$cities,'travel'=>$travel,'travelTime_id'=>$travelTime_id]);
-    }
-    public function postEditTravel(Request $request){
-        $this->validate($request,[
-            'start_city'=>'required',
-            'stop_city'=>'required',
-        ]);
-        $arr = [];
-        for ($c=0;$c<$request['count'];$c++){
-            $arr[$c]=$request[$c.'/medium_city'];
-        }
-        $stArr = implode(",",$arr);
-        $travel = Travels::whereId($request['travel_id'])->first();
-        $travel->start_city = $request['start_city'];
-        $travel->stop_city = $request['stop_city'];
-        if($stArr){
-            $travel->medium_city = $stArr;
-        }
-        $travel->update();
-        return redirect()->route("get.editTravelTime",["travelTime_id"=>$request['travelTime_id'],"travel_id"=>$travel->id])->with('info',"Successfully, A Travel have been updated.");
-    }
+
     public function getEditTravelTime($travelTime_id, $travel_id){
         $cars = Cars::get();
         $mt = array();
@@ -139,6 +109,12 @@ class TravelController extends Controller
         $travel_time->travel_id = $request['travel_id'];
         $travel_time->update();
         return redirect()->route('get.travels')->with('info',"Successfully, The time table have been updated.");
+    }
+
+    public function getDeleteTravelTime($travelTime_id){
+        $time = Travel_time::whereId($travelTime_id)->firstOrFail();
+        $time->delete();
+        return redirect()->back()->with('info',"The travel time ".$travelTime_id." have been deleted.");
     }
 
     public function getTravelWithoutTime() {

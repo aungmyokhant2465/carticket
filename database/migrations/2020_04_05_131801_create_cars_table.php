@@ -21,6 +21,7 @@ class CreateCarsTable extends Migration
             $table->string('car_company');
             $table->integer('driver_id');
             $table->boolean('type')->nullable();
+            $table->boolean('seat_type')->nullable();
             $table->boolean('seat')->nullable();
             $table->boolean('state')->nullable();
             $table->timestamps();

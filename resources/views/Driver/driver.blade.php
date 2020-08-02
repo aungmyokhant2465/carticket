@@ -136,7 +136,5 @@
         <!-- /.content -->
     </div>
 @stop
-@section("script")
 
-@stop
 

@@ -62,16 +62,15 @@ class DriverController extends Controller
     }
 
     public function postEditDriver(Request $request){
+        //dd($request);
         $this->validate($request,[
             "name"=>'required',
-            "email"=>'unique:drivers',
             "age"=>'required',
             "address"=>'required',
             "phone"=>'required|min:8',
             "nrc"=>'required',
             "nrc_prefix"=>'required',
             "full"=>'required',
-            "type"=>'required',
             "image"=>'mimes:jpg,png,jpeg,gif',
             "fnrc"=>'mimes:jpg,gif,png,jpeg',
             "bnrc"=>'mimes:jpg,gif,png,jpeg'
@@ -85,7 +84,6 @@ class DriverController extends Controller
         $driver->phone = $request['phone'];
         $driver->address = $request['address'];
         $driver->nrc = $request['full'];
-        $driver->type = $request['type'];
         if($request['image']){
             $photo_name=date('d.m.y.h.i.s').'.'.$request->file('image')->getClientOriginalName();
             Storage::disk('images')->put($photo_name,File::get($request->file('image')));

@@ -50,6 +50,10 @@ Route::group(['middleware'=>'role:admin|staff'],function (){
             'uses'=>'AuthController@getUserDelete',
             'as'=>'get.user.delete'
         ]);
+        Route::get('{user_id}/userEdit',[
+            'uses'=>'AuthController@getUserEdit',
+            'as'=>'get.user.edit'
+        ]);
         Route::post('userEdit',[
             'uses'=>'AuthController@postUserEdit',
             'as'=>"post.user.edit"
@@ -134,6 +138,10 @@ Route::group(['middleware'=>'role:admin|staff'],function (){
             'uses'=>'CarController@getCarSeat',
             'as'=>'get.carSeat'
         ]);
+        Route::post('set/seat',[
+            'uses'=>'CarController@postCarSeat',
+            'as'=>'post.carSeat'
+        ]);
         Route::get('search',[
             'uses'=>'CarController@getSearch',
             'as'=>'car.search'
@@ -160,18 +168,7 @@ Route::group(['middleware'=>'role:admin|staff'],function (){
             'uses'=>"TravelController@getTravels",
             'as'=>'get.travels'
         ]);
-        Route::get('delete/{travel_id}/{travelTime_id}',[
-            'uses'=>"TravelController@getDeleteTravel",
-            'as'=>'get.deleteTravel'
-        ]);
-        Route::get('edit/{travel_id}/{travelTime_id}',[
-            'uses'=>"TravelController@getEditTravel",
-            'as'=>'get.editTravel'
-        ]);
-        Route::post('edit',[
-            'uses'=>'TravelController@postEditTravel',
-            'as'=>'post.editTravel'
-        ]);
+
         Route::get('editTime/{travelTime_id}/{travel_id}',[
             'uses'=>"TravelController@getEditTravelTime",
             'as'=>'get.editTravelTime'
@@ -179,6 +176,10 @@ Route::group(['middleware'=>'role:admin|staff'],function (){
         Route::post('editTime',[
             'uses'=>"TravelController@postEditTravelTime",
             'as'=>'post.editTravelTime'
+        ]);
+        Route::get('deleteTime,{travelTime_id}',[
+            'uses'=>"TravelController@getDeleteTravelTime",
+            'as'=>'get.deleteTravelTime'
         ]);
         Route::group(['prefix'=>'withAndWithout/time'],function (){
             Route::get('/', [
@@ -198,6 +199,44 @@ Route::group(['middleware'=>'role:admin|staff'],function (){
                 'as'=>'get.deleteTravelWithAndWithoutTime'
             ]);
         });
+    });
+    Route::group(['prefix'=>'percale'], function (){
+        Route::get('/',[
+            'uses'=>'PercaleController@getAllPercales',
+            'as'=>'get.all.percales'
+        ]);
+        Route::get('/search/byDate',[
+            'uses'=>'PercaleController@SearchByDate',
+            'as'=>'percales.byDate'
+        ]);
+        Route::get('/select/city',[
+            'uses'=>'PercaleController@getSelectCity',
+            'as'=>'get.select.city'
+        ]);
+        Route::post('/selected/city',[
+            'uses'=>'PercaleController@postSelectedCity',
+            'as'=>'post.selected.city'
+        ]);
+        Route::get('/assign/to/{to}',[
+            'uses'=>"PercaleController@getAssignPercale",
+            'as'=>'get.assign.percale'
+        ]);
+        Route::post('/assign',[
+            'uses'=>'PercaleController@postAssignPercale',
+            'as'=>'post.assign.percale'
+        ]);
+        Route::get('{id}/delete',[
+            'uses'=>'PercaleController@getDeletePercale',
+            'as'=>'get.delete.percale'
+        ]);
+        Route::get('/assigned',[
+            'uses'=>'PercaleController@getAssigned',
+            'as'=>'get.assigned'
+        ]);
+        Route::get('/assigned/me',[
+            'uses'=>'PercaleController@getAssigedMe',
+            'as'=>'get.assigned.me'
+        ]);
     });
 
 });

@@ -173,7 +173,7 @@
         <!-- /.content -->
     </div>
 @stop
-@section('script')
+@push('script')
     <script>
         $(document).ready(function () {
             $('.dur').on("change",function () {
@@ -191,5 +191,5 @@
             //}
         });
     </script>
-@stop
+@endpush
 

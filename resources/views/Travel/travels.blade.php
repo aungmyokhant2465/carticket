@@ -16,7 +16,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('welcome')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Travels</li>
+                            <li class="breadcrumb-item active">/Travels Time</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -61,7 +61,7 @@
                                                         <i class="fa fa-cogs"></i>
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a href="{{route('get.editTravel',['travel_id'=>$t->Travel->id,'travelTime_id'=>$t->id])}}" class="dropdown-item btn-block text-info"><i class="fa fa-edit"> Edit</i></a>
+                                                        <a href="{{route('get.editTravelTime',['travel_id'=>$t->Travel->id,'travelTime_id'=>$t->id])}}" class="dropdown-item btn-block text-info"><i class="fa fa-edit"> Edit</i></a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="#" class="dropdown-item btn-block text-danger" data-toggle="modal" data-target="#d{{$t->id}}"><i class="fa fa-trash"> Remove</i></a>
                                                     </div>
@@ -81,7 +81,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                <a class="btn btn-primary" href="{{route('get.deleteTravel',['travel_id'=>$t->Travel->id,'travelTime_id'=>$t->id])}}">Confirm</a>
+                                                                <a class="btn btn-primary" href="{{route('get.deleteTravelTime',['travelTime_id'=>$t->id])}}">Confirm</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -110,7 +110,7 @@
                         <li class="nav-item">
                             <a href="{{route('get.carSeat')}}" class="nav-link">
                                 <i class="fa fa-plus-circle nav-icon"></i>
-                                <p>Car Seat</p>
+                                <p>Add Car Seat</p>
                             </a>
                         </li>
                     </ul>
@@ -128,7 +128,7 @@
                         <li class="nav-item">
                             <a href="{{route("get.travels")}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Travels</p>
+                                <p>Time</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -141,6 +141,41 @@
                             <a href="{{route('get.addTravel')}}" class="nav-link">
                                 <i class="fa fa-plus-circle nav-icon"></i>
                                 <p>Add Travel</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-boxes"></i>
+                        <p>
+                            Percale
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('get.select.city')}}" class="nav-link">
+                                <i class="fa fa-plus-circle nav-icon"></i>
+                                <p>Assign</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('get.assigned')}}" class="nav-link">
+                                <i class="fas fa-truck-loading nav-icon"></i>
+                                <p>Assigned Percales</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('get.assigned.me')}}" class="nav-link">
+                                <i class="fas fa-archive nav-icon"></i>
+                                <p>Assigned Me Percales</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('get.all.percales')}}" class="nav-link">
+                                <i class="fas fa-boxes nav-icon"></i>
+                                <p>All Percales</p>
                             </a>
                         </li>
                     </ul>

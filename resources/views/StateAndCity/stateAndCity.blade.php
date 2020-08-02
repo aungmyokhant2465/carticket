@@ -9,6 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
+                        <h1 class="m-0 text-dark"><a href="#" data-toggle="modal" data-target="#add_city" class="btn btn-outline-secondary"><i class="fa fa-plus-square"></i> Add City</a></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -23,6 +24,41 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                <!-- add city modal -->
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="add_city">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Add City</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <form action="{{route('post.stateAndCity')}}" method="post">
+                                        <div class="form-group">
+                                            <label for="city_name">City name</label>
+                                            <input required class="form-control" name="city_name" id="city_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="state">State</label>
+                                            <select required name="state" id="state" class="form-control custom-select">
+                                                <option></option>
+                                                <option>Mon</option>
+                                                <option>Yangon</option>
+                                                <option>Mandalay</option>
+                                                <option>Pago</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group text-right">
+                                            <button type="submit" class="btn btn-outline-info">Save</button>
+                                        </div>
+                                        {{@csrf_field()}}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /add city modal -->
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-7">
@@ -51,6 +87,7 @@
                                         @endforeach
                                 </tbody>
                             </table>
+                            {{ $users->links() }}
                         </div>
                     </div>
                     <div class="col-5">
@@ -88,19 +125,17 @@
                                                                             <input type="hidden" name="id" value="{{$city->id}}">
                                                                             <div class="form-group">
                                                                                 <label for="city_Name">City name</label>
-                                                                                <input class="form-control @if($errors->has("city_Name")) is-invalid @endif" name="city_Name" id="city_Name" value="{{$city->City_name}}">
-                                                                                @if($errors->has('city_Name')) <span class="invalid-feedback"> {{$errors->first('city_Name')}}</span> @endif
+                                                                                <input required class="form-control" name="city_Name" id="city_Name" value="{{$city->City_name}}">
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label for="State">State</label>
-                                                                                <select name="State" id="State" class="form-control custom-select @if($errors->has('State')) is-invalid @endif">
+                                                                                <select required name="State" id="State" class="form-control custom-select">
                                                                                     <option></option>
                                                                                     <option>Mon</option>
                                                                                     <option>Yangon</option>
                                                                                     <option>Mandalay</option>
                                                                                     <option>Pago</option>
                                                                                 </select>
-                                                                                @if($errors->has('State')) <span class="invalid-feedback"> {{$errors->first('State')}}</span> @endif
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -143,39 +178,6 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3>Add City</h3>
-                                    </div>
-                                    <div class="card-footer">
-                                        <form action="{{route('post.stateAndCity')}}" method="post">
-                                            <div class="form-group">
-                                                <label for="city_name">City name</label>
-                                                <input class="form-control @if($errors->has("city_name")) is-invalid @endif" name="city_name" id="city_name">
-                                                @if($errors->has('city_name')) <span class="invalid-feedback"> {{$errors->first('city_name')}}</span> @endif
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="state">State</label>
-                                                <select name="state" id="state" class="form-control custom-select @if($errors->has('state')) is-invalid @endif">
-                                                    <option></option>
-                                                    <option>Mon</option>
-                                                    <option>Yangon</option>
-                                                    <option>Mandalay</option>
-                                                    <option>Pago</option>
-                                                </select>
-                                                @if($errors->has('state')) <span class="invalid-feedback"> {{$errors->first('state')}}</span> @endif
-                                            </div>
-                                            <div class="form-group text-right">
-                                                <button type="submit" class="btn btn-outline-info">Save</button>
-                                            </div>
-                                            {{@csrf_field()}}
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>

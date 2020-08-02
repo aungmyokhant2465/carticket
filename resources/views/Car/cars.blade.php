@@ -14,7 +14,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('welcome')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="{{route('get.cars')}}">Cars</a></li>
+                            <li class="breadcrumb-item active">Cars</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -60,25 +60,21 @@
                                         @if($errors->has('car_photo'))<span class="invalid-feedback">{{$errors->first('car_photo')}}</span> @endif
                                     </div>
                                     <div class="form-group">
-                                        <input value="{{old('car_no')}}" type="text" name="car_no" class="form-control @if($errors->has('car_no')) is-invalid @endif" placeholder="Car No">
-                                        @if($errors->has('car_no'))<span class="invalid-feedback">{{$errors->first('car_no')}}</span> @endif
+                                        <input required value="{{old('car_no')}}" type="text" name="car_no" class="form-control" placeholder="Car No">
                                     </div>
                                     <div class="form-group">
-                                        <input value="{{old('car_modal')}}" type="text" name="car_modal" class="form-control @if($errors->has('car_modal')) is-invalid @endif" placeholder="Car Modal">
-                                        @if($errors->has('car_modal'))<span class="invalid-feedback">{{$errors->first('car_modal')}}</span> @endif
+                                        <input required value="{{old('car_modal')}}" type="text" name="car_modal" class="form-control" placeholder="Car Modal">
                                     </div>
                                     <div class="form-group">
-                                        <input value="{{old('car_company')}}" type="text" name="car_company" class="form-control @if($errors->has('car_company')) is-invalid @endif" placeholder="Car Company">
-                                        @if($errors->has('car_company'))<span class="invalid-feedback">{{$errors->first('car_company')}}</span> @endif
+                                        <input required value="{{old('car_company')}}" type="text" name="car_company" class="form-control" placeholder="Car Company">
                                     </div>
                                     <div class="form-group">
-                                        <select name="driver_id" class="form-control custom-select @if($errors->has('driver_id')) is-invalid @endif">
+                                        <select required name="driver_id" class="form-control custom-select">
                                             <option></option>
                                             @foreach($drivers as $driver)
                                                 <option value="{{$driver->id}}"><i>({{$driver->id}})</i> {{$driver->name}}</option>
                                                 @endforeach
                                         </select>
-                                        @if($errors->has('driver_id'))<span class="invalid-feedback">{{$errors->first('driver_id')}}</span> @endif
                                     </div>
                                     <div class="form-group form-check">
                                         <input name="type" type="checkbox" class="form-check-input" id="type" value=1>
@@ -96,7 +92,7 @@
                 </div>
                 <!-- /add car modal -->
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                         <div class="table table-responsive">
                             <h3 class="d-inline text-secondary"><em>Available Cars</em></h3>
                             <span class="float-right">{{$cars->links()}}</span>
@@ -109,6 +105,8 @@
                                         <th>Company</th>
                                         <th>Driver</th>
                                         <th>Type</th>
+                                        <th>Seats</th>
+                                        <th>Type of seat</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -136,8 +134,10 @@
                                                 <td>{{$car->car_no}}</td>
                                                 <td>{{$car->car_modal}}</td>
                                                 <td>{{$car->car_company}}</td>
-                                                <td>{{$car->Driver->name}}</td>
+                                                <td>{{$car->driver->name}}</td>
                                                 <td>@if($car->type) VIP @else Normal @endif</td>
+                                                <td>{{$car->seat}}</td>
+                                                <td>{{$car->seat_type}}</td>
                                                 <td>
                                                     <div class="btn-group dropup">
                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -171,25 +171,21 @@
                                                                             @if($errors->has('car_photo'))<span class="invalid-feedback">{{$errors->first('car_photo')}}</span> @endif
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <input value="{{$car->car_no}}" type="text" name="car_no" class="form-control @if($errors->has('car_no')) is-invalid @endif" placeholder="Car No">
-                                                                            @if($errors->has('car_no'))<span class="invalid-feedback">{{$errors->first('car_no')}}</span> @endif
+                                                                            <input required value="{{$car->car_no}}" type="text" name="car_no" class="form-control" placeholder="Car No">
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <input value="{{$car->car_modal}}" type="text" name="car_modal" class="form-control @if($errors->has('car_modal')) is-invalid @endif" placeholder="Car Modal">
-                                                                            @if($errors->has('car_modal'))<span class="invalid-feedback">{{$errors->first('car_modal')}}</span> @endif
+                                                                            <input required value="{{$car->car_modal}}" type="text" name="car_modal" class="form-control" placeholder="Car Modal">
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <input value="{{$car->car_company}}" type="text" name="car_company" class="form-control @if($errors->has('car_company')) is-invalid @endif" placeholder="Car Company">
-                                                                            @if($errors->has('car_company'))<span class="invalid-feedback">{{$errors->first('car_company')}}</span> @endif
+                                                                            <input required value="{{$car->car_company}}" type="text" name="car_company" class="form-control" placeholder="Car Company">
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <select name="driver_id" class="form-control custom-select @if($errors->has('driver_id')) is-invalid @endif">
+                                                                            <select required name="driver_id" class="form-control custom-select">
                                                                                 <option></option>
                                                                                 @foreach($drivers as $driver)
                                                                                     <option value="{{$driver->id}}" @if($car->Driver->id == $driver->id) selected @endif><i>({{$driver->id}})</i> {{$driver->name}}</option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            @if($errors->has('driver_id'))<span class="invalid-feedback">{{$errors->first('driver_id')}}</span> @endif
                                                                         </div>
                                                                         <div class="form-group form-check">
                                                                             <input @if($car->type) checked @endif name="type" type="checkbox" class="form-check-input" id="type" value=1>
@@ -235,7 +231,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="table table-responsive">
                             <h3 class="d-inline text-secondary"><em>Modifying Cars</em></h3>
                             <span class="float-right text-warning mb-2"><i class="fa fa-exclamation-triangle fa-2x"></i> </span>

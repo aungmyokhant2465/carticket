@@ -71,87 +71,7 @@
                                             <td>{{$user->address}}</td>
                                             <td>
                                                 <div class="row">
-                                                    <a class="btn btn-outline-info" href="#" data-toggle="modal" data-target="#e{{$user->id}}" ><i class="fa fa-edit"></i></a>
-                                                    <!--Edit Modal -->
-                                                    <div class="modal fade" id="e{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <form action="{{route('post.user.edit')}}" method="post" enctype="multipart/form-data">
-                                                                    <input type="hidden" name="user_id" value="{{$user->id}}">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group">
-                                                                            <label for="image" ><span class="fa fa-image"></span></label>
-                                                                            <input type="file" id="image" name="image" class="form-control @if($errors->has('image')) is-invalid @endif">
-                                                                            @if($errors->has('image'))<span class="invalid-feedback">{{$errors->first('image')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="name">Name</label>
-                                                                            <input type="text" class="form-control @if($errors->has('name')) is-invalid @endif" name="name" id="name" value="{{$user->name}}">
-                                                                            @if($errors->has('name'))<span class="invalid-feedback">{{$errors->first('name')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="email">Email</label>
-                                                                            <input type="email" class="form-control @if($errors->has('email')) is-invalid @endif" name="email" id="email" value="{{$user->email}}">
-                                                                            @if($errors->has('email'))<span class="invalid-feedback">{{$errors->first('email')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="phone">Phone</label>
-                                                                            <textarea type="tel" class="form-control @if($errors->has('phone')) is-invalid @endif" name="phone" id="phone">{{$user->phone}}</textarea>
-                                                                            @if($errors->has('phone'))<span class="invalid-feedback">{{$errors->first('phone')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="shop_name">Shop name</label>
-                                                                            <input type="text" name="shop_name" id="shop_name" class="form-control @if($errors->has('shop_name')) is-invalid @endif" value="{{$user->store_name}}">
-                                                                            @if($errors->has('shop_name')) <span class="invalid-feedback">{{$errors->first('shop_name')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="city">City</label>
-                                                                            <select name="city" id="city" class="custom-select form-control @if($errors->has('city')) is-invalid @endif">
-                                                                                @foreach($city as $c)
-                                                                                    <option value="{{$c->id}}" @if($user->city_id == $c->id) selected @endif>{{$c->City_name}}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                            @if($errors->has('city')) <span class="invalid-feedback">{{$errors->first('city')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="address">Address</label>
-                                                                            <textarea name="address" id="address" class="form-control @if($errors->has('address')) is-invalid @endif">{{$user->address}}</textarea>
-                                                                            @if($errors->has('address')) <span class="invalid-feedback">{{$errors->first('address')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="role">Role</label>
-                                                                            <select name="role" id="role" class="custom-select form-control @if($errors->has('role')) is-invalid @endif">
-                                                                                @foreach($roles as $role)
-                                                                                    <option value="{{$role->id}}" @if($user->roles->first()->id == $role->id) selected @endif>{{$role->name}}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                            @if($errors->has('role')) <span class="invalid-feedback">{{$errors->first('role')}}</span> @endif
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="password">Password</label>
-                                                                            <input type="password" class="form-control @if($errors->has('password')) is-invalid @endif" name="password" id="password">
-                                                                            @if($errors->has('password'))<span class="invalid-feedback">{{$errors->first('password')}}</span> @endif
-                                                                        </div><div class="form-group">
-                                                                            <label for="con_password">Confirm Password</label>
-                                                                            <input type="password" class="form-control @if($errors->has('con_password')) is-invalid @endif" name="con_password" id="con_password">
-                                                                            @if($errors->has('con_password'))<span class="invalid-feedback">{{$errors->first('con_password')}}</span> @endif
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                        <button type="submit" class="btn btn-primary">Update</button>
-                                                                    </div>
-                                                                    {{@csrf_field()}}
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <a class="btn btn-outline-info" href="{{route('get.user.edit',['user_id'=>$user->id])}}"><i class="fa fa-edit"></i></a>
                                                     <a class="btn btn-outline-danger" href="#" data-toggle="modal" data-target="#d{{$user->id}}"><i class="fa fa-trash"></i></a>
                                                     <!--Delete Modal -->
                                                     <div class="modal fade" id="d{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -183,7 +103,7 @@
                                         @endforeach
                                 </tbody>
                             </table>
-
+                            {{ $users->links() }}
                         </div>
                     </div>
                 </div>

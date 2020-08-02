@@ -135,7 +135,7 @@
     </div>
 @stop
 
-@section('script')
+@push('script')
     <script>
         var cities;
         var i = 1;
@@ -155,4 +155,4 @@
             //console.log($('#hid').attr('value'));
         })
     </script>
-@stop
+@endpush

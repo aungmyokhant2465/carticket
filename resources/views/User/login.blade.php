@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login V1</title>
+    <title>Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -57,23 +57,23 @@
                     </button>
                 </div>
 
-                <div class="text-center p-t-12">
-                    <label for="remember" class="txt2">
-                        <input class="validate-input" type="checkbox" name="remember" value=1 id="remember"> <span>Remember me</span>
-                    </label>
-                </div>
+{{--                <div class="text-center p-t-12">--}}
+{{--                    <label for="remember" class="txt2">--}}
+{{--                        <input class="validate-input" type="checkbox" name="remember" value=1 id="remember"> <span>Remember me</span>--}}
+{{--                    </label>--}}
+{{--                </div>--}}
                 <div class="text-center p-t-12">
 						<span class="txt1">
 							please login to continue
 						</span>
                 </div>
 
-                <div class="text-center p-t-136">
-                    <a class="txt2" href="{{route('welcome')}}">
-                        Go to Dashboard
-                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                    </a>
-                </div>
+{{--                <div class="text-center p-t-136">--}}
+{{--                    <a class="txt2" href="{{route('welcome')}}">--}}
+{{--                        Go to Dashboard--}}
+{{--                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
                     @if(Session('info'))
                         <div class="alert alert-danger text-center" style="position: fixed; bottom: 100px; right: 0; left: 0;" role="alert">
                             <span>{{Session('info')}}</span>

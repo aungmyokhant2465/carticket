@@ -57,6 +57,8 @@
                                                     <a href="{{route('get.editTravelWithAndWithoutTime',['travel_id'=>$t->id])}}" class="dropdown-item btn-block text-info"><i class="fa fa-edit"> Edit</i></a>
                                                     <div class="dropdown-divider"></div>
                                                     <a href="#" class="dropdown-item btn-block text-danger" data-toggle="modal" data-target="#d{{$t->id}}"><i class="fa fa-trash"> Remove</i></a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="{{route('get.addTravelTime',['travel_id'=>$t->id])}}" class="dropdown-item btn-block"><i class="fa fa-plus-square"> Add Time</i></a>
                                                 </div>
                                             </div>
                                             <!-- delete travel modal -->
@@ -90,7 +92,7 @@
                     @if($travels_without_time)
                         <div class="col-4">
                             <div class="table table-responsive">
-                                <table class="table table-hover">
+                                <table class="table table-hover" id="travels_without_time">
                                     <thead class="thead-dark">
                                     <tr>
                                         <th>ID</th>
@@ -116,6 +118,8 @@
                                                         <a href="{{route('get.editTravelWithAndWithoutTime',['travel_id'=>$t->id])}}" class="dropdown-item btn-block text-info"><i class="fa fa-edit"> Edit</i></a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="#" class="dropdown-item btn-block text-danger" data-toggle="modal" data-target="#d{{$t->id}}"><i class="fa fa-trash"> Remove</i></a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="{{route('get.addTravelTime',['travel_id'=>$t->id])}}" class="dropdown-item btn-block"><i class="fa fa-plus-square"> Add Time</i></a>
                                                     </div>
                                                 </div>
                                                 <!-- delete travel modal -->

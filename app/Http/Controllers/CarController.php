@@ -7,6 +7,7 @@ use App\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
 class CarController extends Controller
@@ -20,11 +21,7 @@ class CarController extends Controller
     }
     public function postAddCar(Request $request){
         $this->validate($request,[
-            'car_photo'=>'required|mimes:png,jpeg,gif,jpg',
-            'car_no'=>'required',
-            'car_modal'=>'required',
-            'car_company'=>'required',
-            'driver_id'=>'required'
+            'car_photo'=>'required|mimes:png,jpeg,gif,jpg'
         ]);
         $car = new Cars();
         $car->car_no=$request['car_no'];
@@ -51,11 +48,7 @@ class CarController extends Controller
     }
     public function postCarEdit(Request $request){
         $this->validate($request,[
-            'car_photo'=>'mimes:jpg,png,jpeg,gif',
-            'car_no'=>'required',
-            'car_modal'=>'required',
-            'car_company'=>'required',
-            'driver_id'=>'required'
+            'car_photo'=>'mimes:jpg,png,jpeg,gif'
         ]);
         $car= Cars::whereId($request['car_id'])->first();
         $car->car_no=$request['car_no'];
@@ -76,6 +69,24 @@ class CarController extends Controller
         $car->delete();
         Storage::disk('images')->delete($car->car_photo_name);
         return redirect()->back()->with('info','The Car '.$car->car_no.' have been deleted.');
+    }
+
+    public function postCarSeat(Request $request){
+        $validator = Validator::make($request->all(), [
+            'select_car' => 'required',
+            'seat_number' => 'required',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        $id_array = explode(",", $request['select_car']);
+        $cars = Cars::whereIn('id',$id_array)->get();
+        foreach ($cars as $car){
+            $car->seat = $request['seat_number'];
+            $car->seat_type = ($request['seat_type'] == '1')? true: false;
+            $car->update();
+        }
+        return redirect()->back()->with('info',"Seats have been set.");
     }
     public function getSearch(Request $request){
         $dt = Carbon::now();
